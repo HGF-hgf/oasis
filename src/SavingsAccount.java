@@ -27,13 +27,13 @@ public class SavingsAccount extends Account {
     @Override
     public void withdraw(double amount) {
         try {
-            doWithdrawing(amount);
             if (balance - amount < MIN_BALANCE) {
                 throw new InsufficientFundsException(amount);
             }
             if (amount > MAX_WITHDRAW_AMOUNT) {
                 throw new InvalidFundingAmountException(amount);
             }
+            doWithdrawing(amount);
         } catch (BankException e) {
             System.out.println(e.getMessage());
         }

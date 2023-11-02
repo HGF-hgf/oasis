@@ -41,33 +41,23 @@ public abstract class Account {
     /**
      * abc.
      */
-    public void doWithdrawing(double amount) {
-        try {
+    public void doWithdrawing(double amount) throws InsufficientFundsException, InvalidFundingAmountException {
             if (amount < 0) {
-                throw new InsufficientFundsException(amount);
+                throw new InvalidFundingAmountException(amount);
             } else if (amount > this.balance) {
                 throw new InsufficientFundsException(amount);
             }
             this.balance -= amount;
-        } catch (BankException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
         }
-    }
 
     /**
      * abc.
      */
-    public void doDepositing(double amount) {
-        try {
-            if (amount < 0) {
-                throw new InvalidFundingAmountException(amount);
-            } else {
-                this.balance += amount;
-            }
-        } catch (BankException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
+    public void doDepositing(double amount) throws InvalidFundingAmountException {
+        if (amount < 0) {
+            throw new InvalidFundingAmountException(amount);
+        } else {
+            this.balance += amount;
         }
     }
 
